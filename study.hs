@@ -1,3 +1,5 @@
+import           Data.Char
+
 main :: IO ()
 main = print "Hello World"
 
@@ -34,3 +36,47 @@ myTail (_ : xs) = xs
 myGCD :: Int -> Int -> Int
 myGCD a 0 = a
 myGCD a b = myGCD b (a `mod` b)
+
+-- lesson 8
+myLength :: [Int] -> Int
+myLength []       = 0
+myLength (_ : xs) = 1 + myLength xs
+
+myReverse :: [Char] -> [Char]
+myReverse [] = []
+myReverse x  = (last x) : (myReverse (init x))
+
+fastFib :: Int -> Int -> Int -> Int
+fastFib _ _ 0 = 0
+fastFib _ _ 1 = 1
+fastFib _ _ 2 = 1
+fastFib x y 3 = x + y
+fastFib x y c = fastFib (x + y) x (c - 1)
+
+-- lesson 9
+remove :: (Int -> Bool) -> [Int] -> [Int]
+remove test []       = []
+remove test (x : xs) = if test x then remove test xs else x : remove test xs
+
+myProduct :: [Int] -> Int
+myProduct []    = 1
+myProduct aList = foldl (*) 1 aList
+
+myElem :: Int -> [Int] -> Bool
+myElem n aList = (length filtered) > 0
+    where filtered = filter (\x -> x == n) aList
+
+myIsNotSpace :: Char -> Bool
+myIsNotSpace c = c /= ' '
+
+myToLowerCase :: Char -> Char
+myToLowerCase c = toLower c
+
+
+isPalindrome :: String -> Bool
+isPalindrome str = processedStr == reverse processedStr
+    where processedStr = map myToLowerCase (filter myIsNotSpace str)
+
+harmonic :: Int -> Double
+harmonic 0 = 0.0
+harmonic n = foldl (+) 0.0 (map (\x -> 1.0 / x) (take n [1.0, 2.0 ..]))
