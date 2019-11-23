@@ -24,5 +24,13 @@ subseq :: Int -> Int -> [Char] -> [Char]
 subseq start end str = drop start (take end str)
 
 inFirstHalf :: Int -> [Int] -> Bool
-inFirstHalf x list = if x `elem` firstHalf then True else False
+inFirstHalf x list = x `elem` firstHalf
     where firstHalf = take (length list `div` 2) list
+
+myTail :: [Int] -> [Int]
+myTail []       = []
+myTail (_ : xs) = xs
+
+myGCD :: Int -> Int -> Int
+myGCD a 0 = a
+myGCD a b = myGCD b (a `mod` b)
