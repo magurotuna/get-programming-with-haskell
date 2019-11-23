@@ -80,3 +80,11 @@ isPalindrome str = processedStr == reverse processedStr
 harmonic :: Int -> Double
 harmonic 0 = 0.0
 harmonic n = foldl (+) 0.0 (map (\x -> 1.0 / x) (take n [1.0, 2.0 ..]))
+
+-- lesson 14
+data FiveSidedDie = Side1 | Side2 | Side3 | Side4 | Side5 deriving (Enum, Eq, Show)
+class (Enum a) => Die a where
+    roll :: Int -> a
+
+instance Die FiveSidedDie where
+    roll n = toEnum (n `mod` 5)
